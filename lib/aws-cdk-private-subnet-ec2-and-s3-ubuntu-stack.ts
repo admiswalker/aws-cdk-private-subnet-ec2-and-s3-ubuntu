@@ -81,12 +81,13 @@ export class AwsCdkTemplateStack extends cdk.Stack {
     const ec2_instance = new ec2.Instance(this, props.prj_name+'-'+this.constructor.name+'-general_purpose_ec2', {
       instanceType: new ec2.InstanceType('t3a.nano'), // 2 vCPU, 0.5 GB
 //    machineImage: ec2.MachineImage.genericLinux({'us-west-2': 'ami-XXXXXXXXXXXXXXXXX'}),
-      machineImage: new ec2.AmazonLinuxImage({
-        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX,
-        edition: ec2.AmazonLinuxEdition.STANDARD,
-        virtualization: ec2.AmazonLinuxVirt.HVM,
-        storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
-      }),
+      machineImage: ec2.MachineImage.genericLinux({'ap-northeast-1': 'ami-02f6e1ad275c55e0b'}),
+//      machineImage: new ec2.AmazonLinuxImage({
+//        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX,
+//        edition: ec2.AmazonLinuxEdition.STANDARD,
+//        virtualization: ec2.AmazonLinuxVirt.HVM,
+//        storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
+//      }),
       vpc: vpc,
 //    blockDevices: [{
 //	    deviceName: '/dev/sda1',

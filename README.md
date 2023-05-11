@@ -28,6 +28,21 @@ ssh -i ~/.ssh/ec2/id_ed25519 admis@$EC2_INSTANCE_ID
   $ curl https://test-private-2023-0511.s3.ap-northeast-1.amazonaws.com/test.txt
   ```
 
+## AWS CLI のインストール
+
+```bash
+sudo apt-get install -y zip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+rm ./awscliv2.zip
+rm -rf ./aws
+```
+
+```bash
+/usr/local/bin/aws --version
+```
+
 ## 認証情報の確認
 ```
 aws configure list
@@ -44,6 +59,12 @@ aws configure list
   - [AWS CDKでEC2にIAMロールを割り当てる時の覚書](https://wp-kyoto.net/add-iam-role-to-ec2-instance-by-aws-cdk/)
 2. ec2.Instance で EC2 を作成する場合
    ソースコード参照
+
+### Ubuntu の AMI を調べる
+
+- [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/)
+- [AWS CDKでEC2をデプロイする](https://qiita.com/Brutus/items/bba6a49a1a05c3277673)
+
 
 ---
 
