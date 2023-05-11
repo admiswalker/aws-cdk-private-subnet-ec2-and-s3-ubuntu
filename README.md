@@ -101,6 +101,13 @@ aws configure list
 
 ### よく使うコマンド
 
+#### プロジェクトの初期化
+
+```bash
+$ mkdir cdk-workshop && cd cdk-workshop
+$ cdk init sample-app --language typescript
+```
+
 #### テスト
 ```bash
 npx npm run test
