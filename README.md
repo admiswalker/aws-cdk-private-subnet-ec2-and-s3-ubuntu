@@ -26,22 +26,51 @@ ssh -i ~/.ssh/ec2/id_ed25519 admis@$EC2_INSTANCE_ID
   ```bash
   $ curl https://[ BUCKET_NAME ].s3.ap-northeast-1.amazonaws.com/test.txt
   $ curl https://test-private-2023-0511.s3.ap-northeast-1.amazonaws.com/test.txt
+
+
   ```
 
-## AWS CLI のインストール
 
-```bash
-sudo apt-get install -y zip
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-rm ./awscliv2.zip
-rm -rf ./aws
-```
+ ## AWS CLI のインストール
 
-```bash
-/usr/local/bin/aws --version
-```
+- インターネットゲートウェイがある場合
+  ```bash
+  sudo apt-get install -y zip
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install
+  rm ./awscliv2.zip
+  rm -rf ./aws
+  ```
+
+- インターネットゲートウェイがない場合
+  ```bash
+  local-PC$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  local-PC$ unzip awscliv2.zip
+  local-PC$ tar -Jcf awscliv2.tar.xz ./aws
+  local-PC$ scp -i ~/.ssh/ec2/id_ed25519 awscliv2.tar.xz admis@$EC2_INSTANCE_ID:~/
+  
+  EC2$ tar -xf awscliv2.tar.xz
+  EC2$ sudo ./aws/install
+  ```
+
+  結果
+  ```bash
+  $ aws configure list
+        Name                    Value             Type    Location
+        ----                    -----             ----    --------
+     profile                <not set>             None    None
+  access_key     ****************DXB7         iam-role    
+  secret_key     ****************k5wf         iam-role    
+      region           ap-northeast-1             imds 
+  ```
+  → iam-role も認識されている．`aws s3 ls` で bucket の状況も表示される．
+
+- インストールの確認
+  ```bash
+  /usr/local/bin/aws --version
+  aws --version
+  ```
 
 ## 認証情報の確認
 ```
